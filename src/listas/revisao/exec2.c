@@ -10,41 +10,41 @@ acordo com os seguintes critérios:
 
 int main(){
 	// int qntd_funcionarios = 10;
-	float lista_salarios[10], lista_ajustes[10];
+	float salarios_antigos[10], salarios_novos[10], lista_ajustes[10];
 	char lista_codigos[10];
 	
 	printf("--- REAJUSTE SALARIAL 2026 ---");
 	
-	// INPUT
-	for (int i = 0; i < 10; i++)
-	{
-		printf("Digite o codigo do funcionario: ");
-		scanf("%s", &lista_codigos[i]);
-
-		printf("Digite o salario do funcionario: ");
-		scanf("%f", &lista_salarios[i]);
-
-		if (lista_salarios[i] < 10000){
-			lista_ajustes[i] = 0.2;
-		} else if (lista_salarios[i] >= 10000 && lista_salarios < 25000){
-			lista_ajustes[i] = 0.06;
-		} else if (lista_salarios[i] >= 25000{
-			lista_ajustes[i] = 0.03;
-		}
-	}
 	
 	for (int i = 0; i < 10; i++)
 	{
-		if (lista_salarios[i] < 10000){
+		printf("\nDigite o codigo do funcionario: ");
+		scanf("%s", &lista_codigos[i]);
 
+		printf("\nDigite o salario do funcionario: ");
+		scanf("%f", &salarios_antigos[i]);
+
+		if (salarios_antigos[i] < 10000){
+			lista_ajustes[i] = 0.2;
+		} else if (salarios_antigos[i] >= 10000 && salarios_antigos[i] < 25000){
+			lista_ajustes[i] = 0.06;
+		} else if (salarios_antigos[i] >= 25000){
+			lista_ajustes[i] = 0.03;
 		}
+
+		salarios_novos[i] = salarios_antigos[i] + (salarios_antigos[i] * lista_ajustes[i]);
 	}
+	
+
 
 	printf("\n--- REAJUSTES ---");
 	for (int i = 0; i < 10; i++)
 	{
 		printf("\nCodigo: %s", lista_codigos[i]);
-		printf("Percentual do reajuste: %d%%", )
+		printf("\nPercentual do reajuste: %d%%", lista_ajustes[i] * 100);
+		printf("\nSalario antigo: R$%.2f", salarios_antigos[i]);
+		printf("\nNovo salario: R$%.2f", salarios_novos[i]);
 	}
+
 	return 0;
 }
