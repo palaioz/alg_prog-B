@@ -10,51 +10,52 @@ na matriz (por exemplo: “O valor X foi encontrado na posição I,J da matriz�
 
 int main(){
 
-	int A[10][10], searchVec[10];
-	int i, j, k;
+    int A[10][10], searchVec[10];
+    int i, j, k;
 
-	srand(time(NULL));
+    srand(time(NULL));
 
+    printf("--- Matriz A (10x10) ---\n");
+    for(i = 0; i < 10; i++)
+    {
+        for(j = 0; j < 10; j++)
+        {
+            A[i][j] = rand() % 200;
+            printf("%3d\t", A[i][j]);
+        }
+        printf("\n");
+    }
 
-	printf("--- Matriz A (10x10) ---\n");
-	for(i = 0; i < 10; i++)
-	{
-		for(j = 0; j < 10; j++)
-		{
-			A[i][j] = rand() % 200;
-			printf("%3d\t", A[i][j]);
-		}
-		printf("\n");
-	}
+    printf("\n--- Leitura dos 10 valores de busca ---\n");  
+    for(i = 0; i < 10; i++)
+    {
+        printf("\nDigite o valor (int) para searchVec[%d]: ", i);
+        scanf("%d", &searchVec[i]);
+    }
 
-	printf("\n--- Leitura dos 10 valores de busca ---\n");	
-	for(i = 0; i < 10; i++)
-	{
-		printf("\nDigite o valor (int) para searchVec[%d]: ", i);
-		scanf("%d", &searchVec[i]);
-	}
+    printf("\n--- Resultados da busca ---\n");
+    for(i = 0; i < 10; i++)
+    {
+        int encontrado = 0;
 
-	printf("\n--- Resultados da busca ---\n");
-	for(i = 0; i < 10; i++)
-	{
-		int encontrado = 0;
+        for(j = 0; j < 10; j++)
+        {
+            for(k = 0; k < 10; k++)
+            {
+                if (searchVec[i] == A[j][k])
+                {
+                    // Se quiser inverter para mostrar Coluna, Linha: mude para [k, j]
+                    // Mantendo o padrão Matriz [Linha, Coluna]: [j, k]
+                    printf("\nO valor %d foi encontrado na posicao Linha %d, Coluna %d da matriz.", searchVec[i], j, k);
+                    encontrado = 1;
+                }
+            }
+        }
 
-		for(j = 0; j < 10; j++)
-		{
-			for(k = 0; k < 10; k++)
-			{
-				if (searchVec[i] == A[j][k])
-				{
-					printf("\nO valor %d foi encontrado na posicao [%d, %d] da matriz.", searchVec[i], j, k);
-					encontrado = 1;
-				}
-			}
-		}
+        if (!encontrado){
+            printf("\nO valor %d NAO foi encontrado na matriz.", searchVec[i]);
+        }
+    }
 
-		if (!encontrado){
-			printf("\nO valor %d NAO foi encontrado na matriz.", searchVec[i]);
-		}
-	}
-
-	return 0;
+    return 0;
 }
