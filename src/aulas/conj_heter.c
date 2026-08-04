@@ -27,7 +27,17 @@ void imprimirAluno(struct aluno a) {
     printf("Curso        : %d\n", a.curso);
     printf("Mensalidade  : %.2f\n", a.mensalidade);
     printf("Media Geral  : %.2f\n", a.mediaGeral);
-    printf("Desempenho   : %s\n", a.mediaGeral);
+    printf("Desempenho   : ");
+    int qtdAsteriscos = (int)a.mediaGeral - 5;
+
+    if (qtdAsteriscos < 0) {
+        qtdAsteriscos = 0;
+    }
+
+    for (int i = 0; i < qtdAsteriscos; i++) {
+        printf("* ");
+    }
+    printf("\n");
     printf("==============================\n");
 }
 
