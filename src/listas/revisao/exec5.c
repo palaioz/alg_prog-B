@@ -4,7 +4,21 @@ maiores que o número lido e menores que 1000.
 */
 
 #include <stdio.h>
+
 int main(){
-	printf("Hello World");
+	int num;
+
+	printf("Digite um numero inteiro menor que 1000: ");
+	scanf("%d", &num);
+
+	printf("Nuemros impares entre %d e 1000:\n", num);
+	for(int i = num; i < 1000; i++)
+	{
+		if (i % 2 == 1)
+		{
+			printf("%d  ", i);
+		}
+	}
+
 	return 0;
 }
