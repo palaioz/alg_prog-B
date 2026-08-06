@@ -6,7 +6,19 @@ login do usuário.
 */
 
 #include <stdio.h>
+
 int main(){
-	printf("Hello World");
+	char nome[150], semestre[1], ano[4];
+	char senha[20];
+
+	printf("Digite seu nome: ");
+	fgets(nome, 150, stdin);
+
+	printf("Digite o numero do semestre (1 ou 2): ");
+	scanf("%c", semestre);
+
+	printf("Digite o ano: ");
+	fgets(ano, 4, stdin);
+
 	return 0;
 }
