@@ -35,6 +35,9 @@ int main(){
 			{
 				printf("%d  ", vector[i]);
 			}
+
+			printf("\n");
+			system("pause");
 			break;
 		
 		case 2:
@@ -42,6 +45,9 @@ int main(){
 			{
 				printf("%d  ", vector[i]);
 			}
+			
+			printf("\n");
+			system("pause");
 			break; 
 
 		case 0:

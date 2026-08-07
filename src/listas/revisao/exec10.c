@@ -13,6 +13,8 @@
 #define TAM 4
 
 int main(){
+	srand(time(NULL));
+
 	int matriz[TAM][TAM];
 	int somaMatriz = 0, somaDiagonal = 0; 
 	int produtoPrimeiraLinha = 1, somaPrimeiraColuna = 0;
@@ -21,7 +23,7 @@ int main(){
 	{
 		for(int j = 0; j < TAM; j++)
 		{
-			matriz[i][j] = 1 + i + j;						// atribuindo valor às células da matriz 
+			matriz[i][j] = rand()%20;						// atribuindo valor às células da matriz 
 			somaMatriz += matriz[i][j];					// somando cada elemento em somaMatriz
 			
 			// Cálculos condicionais necessários durante o preenchimento

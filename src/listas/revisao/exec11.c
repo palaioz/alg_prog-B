@@ -39,7 +39,13 @@ int main(){
 		printf("%s\n", inverse);
 		
 	} else {
-		printf("A palavra tem %d vogais.", vowels);
+		if (vowels == 0){
+			printf("A palavra nao tem vogais.");
+		} else if (vowels == 1){
+			printf("A palavra tem 1 vogal.");
+		} else {
+			printf("A palavra tem %d vogais.", vowels);
+		}
 	}
 
 	return 0;

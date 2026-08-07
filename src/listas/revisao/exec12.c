@@ -6,19 +6,50 @@ login do usuário.
 */
 
 #include <stdio.h>
+#include <string.h>
+#include <ctype.h>
 
 int main(){
-	char nome[150], semestre[1], ano[4];
-	char senha[20];
+	char nome[150], login[50] = "";
+	int dia, mes, ano;
+	int i, j = 0;
+	int semestre;
 
 	printf("Digite seu nome: ");
-	fgets(nome, 150, stdin);
+	fgets(nome, sizeof(nome), stdin);
 
-	printf("Digite o numero do semestre (1 ou 2): ");
-	scanf("%c", semestre);
+	printf("Digite a data (dd/mm/aaa): ");
+	scanf("%d/%d/%d", &dia, &mes, &ano);
 
-	printf("Digite o ano: ");
-	fgets(ano, 4, stdin);
+	if (nome[0] != ' ' && nome[0] != '\n' && nome[0] != '\0'){
+		login[j] = toupper(nome[0]);
+		j++;
+	}
 
+	for (i = 0; nome[i] != '\0'; i++){
+		if (nome[i] == ' ' && nome[i+1] != ' ' && nome[i+1] != '\n' && nome[i+1] != '\0'){
+			login[j] = toupper(nome[i+1]);
+			j++;
+		}
+	}
+	
+	if (mes > 6){
+		semestre = 2;
+	} else {
+		semestre = 1;
+	}
+
+	login[j++] = (ano/1000) + '0';
+	login[j++] = ((ano/100) % 10) + '0';
+	login[j++] = ((ano/10) % 10) + '0';
+	login[j++] = (ano % 10) + '0';
+
+	login[j++] = (semestre / 10) + '0';
+	login[j++] = (semestre % 10) + '0';
+
+	login[j] = '\0';
+
+	printf("Login gerado: %s\n", login);
+	
 	return 0;
 }

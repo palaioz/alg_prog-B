@@ -42,7 +42,7 @@ int main(){
     {
         for(j = 0; j < 10; j++)
         {
-			printf("%6d\t\t", matriz[i][j]);
+			printf("%6d\t", matriz[i][j]);
         }
         printf("\n");
     }
