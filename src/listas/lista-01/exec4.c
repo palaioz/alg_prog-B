@@ -5,7 +5,7 @@ Depois de lido o vetor, retorne o nome e o índice do produto de menor preço de
 */
 
 #include <stdio.h>
-#include <string
+#include <string.h>
 
 #define QTD_PRODUTOS 3
 
@@ -20,6 +20,9 @@ int main(){
 	int i;
 
 	for(i = 0; i < QTD_PRODUTOS; i++){
+		int c;
+		while ((c = getchar()) != '\n' && c != EOF);
+
 		printf("\nDigite o nome do produto %d: ", i);
 		fgets(P[i].nome, sizeof(P[i].nome), stdin);
 		P[i].nome[strcspn(P[i].nome, "\n")] = '\0';
@@ -28,8 +31,26 @@ int main(){
 		scanf("%f", &P[i].preco_compra);
 
 		printf("\nDigite o preco de venda: ");
-		scanf("%f", P[i].preco_venda);
+		scanf("%f", &P[i].preco_venda);
 	}
+
+	int index_mvc = 0;
+	float menor_valor_compra = P[0].preco_compra;
+	char nome_mvc[100]; 
+	snprintf(nome_mvc, sizeof(nome_mvc), P[0].nome);
+
+	for(i = 1; i < QTD_PRODUTOS; i++){
+		if (P[i].preco_compra <= menor_valor_compra){
+			index_mvc = i;
+			menor_valor_compra = P[i].preco_compra;
+			snprintf(nome_mvc, sizeof(nome_mvc), P[i].nome);
+		} else {
+			continue;
+		}
+	}
+
+	printf("\nProduto com menor valor de compra: ");
+	printf("[%d] %s: R$%.2f", index_mvc, nome_mvc, menor_valor_compra);
 
 	return 0;
 }
