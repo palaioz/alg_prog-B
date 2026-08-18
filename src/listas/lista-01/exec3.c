@@ -19,7 +19,7 @@ regras:
 #define TOTAL_HORAS 80
 
 struct Aluno {
-	char nome[100];
+	char nome[150];
 	int faltas;
 	float frequencia;
 	float nota[3];
@@ -31,7 +31,7 @@ int main(){
 	int i, j;
 
 	for(i = 0; i < N; i++){
-		int soma = 0;
+		float soma = 0;
 
 		if (i > 0) {
             int c;
@@ -48,7 +48,7 @@ int main(){
 
 		for(j = 0; j < 3; j++){
 			printf("\nNota %d: ", j+1);
-			scanf("%f", &a[i].nome[j]);
+			scanf("%f", &a[i].nota[j]);
 			soma += a[i].nota[j];
 		}
 

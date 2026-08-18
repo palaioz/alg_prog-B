@@ -20,8 +20,10 @@ int main(){
 	int i;
 
 	for(i = 0; i < QTD_PRODUTOS; i++){
-		int c;
-		while ((c = getchar()) != '\n' && c != EOF);
+		if (i > 0){
+			int c;
+			while ((c = getchar()) != '\n' && c != EOF);
+		}
 
 		printf("\nDigite o nome do produto %d: ", i);
 		fgets(P[i].nome, sizeof(P[i].nome), stdin);
@@ -37,10 +39,10 @@ int main(){
 	int index_mvc = 0;
 	float menor_valor_compra = P[0].preco_compra;
 	char nome_mvc[100]; 
-	snprintf(nome_mvc, sizeof(nome_mvc), P[0].nome);
+	snprintf(nome_mvc, sizeof(nome_mvc), "%s", P[0].nome);
 
 	for(i = 1; i < QTD_PRODUTOS; i++){
-		if (P[i].preco_compra <= menor_valor_compra){
+		if (P[i].preco_compra < menor_valor_compra){
 			index_mvc = i;
 			menor_valor_compra = P[i].preco_compra;
 			snprintf(nome_mvc, sizeof(nome_mvc), P[i].nome);
