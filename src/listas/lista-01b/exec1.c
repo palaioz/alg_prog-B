@@ -16,11 +16,12 @@ de custo (o mesmo percentual é aplicado a todos os produtos).
 */
 
 #include <stdio.h>
-#include <stdlib.h>'
+#include <stdlib.h>
 #include <windows.h>
 #include <locale.h>
 
-struct tipoProduto{
+// struct de um tipo básico de produto (codigo, nome, unidade, PCompra, PVenda, qtd_estoque)
+typedef struct Produto {
     int codigo;
     char nome[30];
     char unidade[20];
@@ -29,23 +30,31 @@ struct tipoProduto{
     float qtd_estoque;
 };
 
-struct tipoProduto lerProduto(const char* mensagem){
+/*
+    Função para ler um produto
+    - Parâmetro(s): const char* mensagem;
+    - Retorna: struct tipoProduto p;
+*/
+struct Produto lerProduto(const char* mensagem){
 
-    struct tipoProduto p;
-    char auxChar;
-    char auxFloat;
-    char auxInt;
+    struct Produto p;
 
     printf("%s", mensagem);
 
-    scanf("%d ", &p.codigo);
+    printf("Código do produto: ");
+    scanf("%d", &p.codigo);
 
+    printf("Nome: ");
     scanf("%s", p.nome);
+    printf("Unidade/Categoria: ");
     scanf("%s", p.unidade);
     
-    scanf("%f ", p.PCompra);
-    scanf("%f ", p.PVenda);
-    scanf("%f ", p.qtd_estoque);
+    printf("Preço de compra: ");
+    scanf("%f", &p.PCompra);
+    printf("Preço de venda: ");
+    scanf("%f", &p.PVenda);
+    printf("Quantidade em estoque: ");
+    scanf("%f", &p.qtd_estoque);
 
     return p;
 }
@@ -54,15 +63,32 @@ int main(){
     SetConsoleOutputCP(65001);
 	setlocale(LC_ALL, "pt_BR.UTF-8");
 
-    FILE *fptr;
-    fptr = fopen(".\\test.txt", "w");
+    int cpt = 2;
+    int count = 0;
 
-    char _string[100];
-    fgets(_string, 100, fptr);
+    // struct Product *products = malloc(cpt * sizeof(Product));
 
-    printf("%s", _string);
+    // if (products == NULL) {
+    //     printf("Memory allocation failed!\n");
+    //     return 1;
+    // }
 
-    fclose(fptr);
+    // struct tipoProduto p[];
+    int opt = 1;
+
+    printf("\n===================================\n");
+	printf("\tCONTROLE DE ESTOQUE");
+	printf("\n===================================\n");
+
+
+    while (opt != 0){
+        struct Produto produto1 = lerProduto("\nDigite alguma coisa\n");
+        printf("\n[1] - Continuar");
+        printf("\n[0] - Encerrar");
+        printf("\nOpção: ");
+        scanf("%d", &opt);
+    }
+
 
     return 0;
 }
