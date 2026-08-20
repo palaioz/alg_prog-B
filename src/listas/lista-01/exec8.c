@@ -15,10 +15,9 @@ struct tipoData {
 	int ano;
 }; 
 
+
+// Função para ler a string e preencher a estrutura tipoData usando atoi()
 struct tipoData lerData(const char* mensagem) {
-	/* 
-		Função para ler a string e preencher a estrutura tipoData usando atoi()
-	*/
 
 	struct tipoData d;
 	char dataLida[12];
@@ -50,11 +49,11 @@ struct tipoData lerData(const char* mensagem) {
 	return d;
 }
 
+/*
+	Função para comparar duas datas
+	Retorna: -1 se d1 < d2, 1 se d1 > d2, 0 se forem iguais
+*/
 int compararDatas(struct tipoData d1, struct tipoData d2) {
-	/*
-		Função para comparar duas datas
-		Retorna: -1 se d1 < d2, 1 se d1 > d2, 0 se forem iguais
-	*/
 
 	if (d1.ano != d2.ano){
 		return (d1.ano < d2.ano) ? -1 : 1;
