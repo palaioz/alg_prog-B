@@ -14,8 +14,10 @@ regras:
 
 #include <stdio.h>
 #include <string.h>
+#include <windows.h>
+#include <locale.h>
 
-#define N 3
+#define N 17
 #define TOTAL_HORAS 80
 
 struct Aluno {
@@ -27,36 +29,39 @@ struct Aluno {
 };
 
 int main(){
+	SetConsoleOutputCP(65001);
+	setlocale(LC_ALL, "pt_BR.UTF-8");
+
 	struct Aluno a[N];
 	int i, j;
 
+	// --- LEITURA DOS DADOS ---
 	for(i = 0; i < N; i++){
 		float soma = 0;
 
-		if (i > 0) {
-            int c;
-            while ((c = getchar()) != '\n' && c != EOF);
-        }
+		printf("--- Aluno %d ---\n", i + 1);
 
-		printf("--- Aluno %d ---\n", i+1);
-		printf("\nNome: ");
+		printf("Nome: ");
 		fgets(a[i].nome, sizeof(a[i].nome), stdin);
 		a[i].nome[strcspn(a[i].nome, "\n")] = '\0';
 
-		printf("\nFalta (em horas): ");
+		printf("Falta (em horas): ");
 		scanf("%d", &a[i].faltas);
 
 		for(j = 0; j < 3; j++){
-			printf("\nNota %d: ", j+1);
+			printf("Nota %d: ", j+1);
 			scanf("%f", &a[i].nota[j]);
 			soma += a[i].nota[j];
 		}
 
-		a[i].media = soma / 3.0;
+		int c; 
+		while ((c = getchar()) != '\n' && c != EOF);
 
+		a[i].media = soma / 3.0;
 		a[i].frequencia = ((float)(TOTAL_HORAS - a[i].faltas)*100.0) / TOTAL_HORAS;
 	}
 
+	// --- EXIBIÇÃO DOS RESULTADOS ---
 	printf("\n=== CLASSE ===\n");
 	for(i = 0; i < N; i++){
 		printf("\nNome: %s", a[i].nome);

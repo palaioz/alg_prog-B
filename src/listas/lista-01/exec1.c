@@ -45,9 +45,9 @@ int main(){
 	printf("\n===================\n");
 
 	for(int i = 0; i < 3; i++){
-		printf("\n=== FICHA FUNCIONARIO %d ===\n", i);
+		printf("\n=== FICHA FUNCIONARIO %d ===\n", i + 1);
 		printf("Nome: %s", f[i].nome);
-		printf("\nSalario: %.0f", f[i].salario);
+		printf("\nSalario: %.2f", f[i].salario);
 		printf("\nCargo: %s", f[i].cargo);
 		printf("\nIdade: %d", f[i].idade);
 		printf("\n");

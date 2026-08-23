@@ -7,33 +7,51 @@ para ler e mostrar os dados.
 #include <stdio.h>
 #include <string.h>
 
+#define TAM 3
+
+struct Cliente{
+	char nome[100];
+	char cidade[100];
+	float total_compra;
+	int mes_compra;
+};
+
 int main(){
-	struct Cliente{
-		char nome[100];
-		char cidade[100];
-		float total_compra;
-		int mes_compra;
-	};
+	struct Cliente clientes[TAM];
+	int i;
 
-	struct Cliente c;
+	// --- LEITURA DOS DADOS ---
+	printf("====== CADASTRO VendeTudo ======\n");
+	for (i = 0; i < TAM; i++) {
+		printf("\n--- Cliente %d ---\n", i + 1);
 
-	printf("\n=== CAIXA VENDETUDO ===");
-	printf("\nNome do cliente: ");
-	fgets(c.nome, sizeof(c.nome), stdin);
-	c.nome[strcspn(c.nome, "\n")] = '\0';
+		printf("Nome do cliente: ");
+		fgets(clientes[i].nome, sizeof(clientes[i].nome), stdin);
+		clientes[i].nome[strcspn(clientes[i].nome, "\n")] = '\0';
+	
+		printf("Cidade: ");
+		fgets(clientes[i].cidade, sizeof(clientes[i].cidade), stdin);
+		clientes[i].cidade[strcspn(clientes[i].cidade, "\n")] = '\0';
+	
+		printf("Total da compra: ");
+		scanf("%f", &clientes[i].total_compra);
+	
+		printf("Mes da compra (1-12): ");
+		scanf("%d", &clientes[i].mes_compra);
 
-	printf("\nCidade: ");
-	fgets(c.cidade, sizeof(c.cidade), stdin);
-	c.cidade[strcspn(c.cidade, "\n")] = '\0';
+		getchar();
+	}
 
-	printf("\nTotal da compra: ");
-	scanf("%f", &c.total_compra);
-
-	printf("\nMes da compra (int): ");
-	scanf("%d", &c.mes_compra);
-
-	printf("\n\n=== NOTA ===");
-	printf("\n%s: %s | %.2f | %d", c.nome, c.cidade, c.total_compra, c.mes_compra);
+	// --- EXIBIÇÃO DOS DADOS ---
+	printf("\n\n====== RELATORIO DE CLIENTES ======\n");
+	for (i = 0; i < TAM; i++){
+		printf("\nCliente %d", i + 1);
+		printf("\nNome: %s", clientes[i].nome);
+		printf("\nCidade %s", clientes[i].cidade);
+		printf("\nTotal da Compra: R$ %.2f", clientes[i].total_compra);
+		printf("\nMes da compra: %d\n", clientes[i].mes_compra);
+		printf("-----------------------------------");
+	}
 
 	return 0;
 }

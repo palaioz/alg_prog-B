@@ -10,56 +10,44 @@ converte uma string em um número inteiro.
 #include <windows.h>
 #include <locale.h>
 
+// Definição única da estrutura
 struct tipoHorario {
-	int h;
-	int min;
-	int seg;
+    int h;
+    int min;
+    int seg;
 };
 
-int main(){
-	SetConsoleOutputCP(65001);
-	setlocale(LC_ALL, "pt_BR.UTF-8");
+int main() {
+    SetConsoleOutputCP(65001);
+    setlocale(LC_ALL, "pt_BR.UTF-8");
 
-	struct tipoHorario hora; 
-	char horaLida[10];
-	char aux[3];
+    struct tipoHorario hora; 
+    char horaLida[10];
+    char aux[3];
 
-	typedef struct {
-		int h; 
-		int min; 
-		int seg; 
-	} tipoHorario;
+    // O caractere nulo é colocado uma única vez na última posição
+    aux[2] = '\0';
 
-	printf("Digite um horario (hh:mm:ss): ");
-	scanf("%s", horaLida);
+    printf("Digite um horario (hh:mm:ss): ");
+    scanf("%9s", horaLida);
 
-	// Convertendo a hora
-	aux[0] = horaLida[0];
-	aux[1] = horaLida[1];
-	aux[2] = '\0';
-	printf("aux = %s\n", aux);
+    // Converte a hora (índices 0 e 1)
+    aux[0] = horaLida[0];
+    aux[1] = horaLida[1];
+    hora.h = atoi(aux);
+    
+    // Converte os minutos (índices 3 e 4)
+    aux[0] = horaLida[3];
+    aux[1] = horaLida[4];
+    hora.min = atoi(aux);
+    
+    // Converte os segundos (índices 6 e 7)
+    aux[0] = horaLida[6];
+    aux[1] = horaLida[7];
+    hora.seg = atoi(aux);
 
-	hora.h = atoi(aux);
-	printf("Hora = %02d\n", hora.h);
-	
-	// Convertendo os minutos
-	aux[0] = horaLida[3];
-	aux[1] = horaLida[4];
-	printf("aux = %s\n", aux);
-	
-	hora.min = atoi(aux);
-	printf("Minutos = %d\n", hora.min);
-	
-	// Convertendo os segundos
-	aux[0] = horaLida[6];
-	aux[1] = horaLida[7];
-	printf("aux = %s\n", aux);
-	
-	hora.seg = atoi(aux);
-	printf("Segundos = %d\n", hora.seg);
+    // Saída no formato solicitado
+    printf("\n%02d hora(s), %02d minuto(s) e %02d segundo(s).\n", hora.h, hora.min, hora.seg);
 
-	// Frase
-	printf("\n%02d hora(s), %d minuto(s) e %d segundo(s).", hora.h, hora.min, hora.seg);
-
-	return 0;
+    return 0;
 }

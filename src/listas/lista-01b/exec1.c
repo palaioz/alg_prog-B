@@ -17,78 +17,175 @@ de custo (o mesmo percentual é aplicado a todos os produtos).
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <windows.h>
 #include <locale.h>
 
-// struct de um tipo básico de produto (codigo, nome, unidade, PCompra, PVenda, qtd_estoque)
-typedef struct Produto {
+#define MAX_PRODUTOS 100
+
+typedef struct {
     int codigo;
     char nome[30];
     char unidade[20];
     float PCompra;
     float PVenda;
     float qtd_estoque;
-};
+} Produto;
 
-/*
-    Função para ler um produto
-    - Parâmetro(s): const char* mensagem;
-    - Retorna: struct tipoProduto p;
-*/
-struct Produto lerProduto(const char* mensagem){
-
-    struct Produto p;
-
-    printf("%s", mensagem);
-
-    printf("Código do produto: ");
-    scanf("%d", &p.codigo);
-
-    printf("Nome: ");
-    scanf("%s", p.nome);
-    printf("Unidade/Categoria: ");
-    scanf("%s", p.unidade);
-    
-    printf("Preço de compra: ");
-    scanf("%f", &p.PCompra);
-    printf("Preço de venda: ");
-    scanf("%f", &p.PVenda);
-    printf("Quantidade em estoque: ");
-    scanf("%f", &p.qtd_estoque);
-
-    return p;
+// Função auxiliar para exibir os dados de um produto
+void exibirProduto(Produto p) {
+    printf("\nCódigo: %d | Nome: %s | Unidade: %s", p.codigo, p.nome, p.unidade);
+    printf("\nCusto: R$ %.2f | Venda: R$ %.2f | Estoque: %.2f\n", p.PCompra, p.PVenda, p.qtd_estoque);
+    printf("--------------------------------------------------");
 }
 
-int main(){
+int main() {
     SetConsoleOutputCP(65001);
-	setlocale(LC_ALL, "pt_BR.UTF-8");
+    setlocale(LC_ALL, "pt_BR.UTF-8");
 
-    int cpt = 2;
-    int count = 0;
+    Produto produtos[MAX_PRODUTOS];
+    int total = 0;
+    float margem_lucro;
+    char opcao_cadastro;
 
-    // struct Product *products = malloc(cpt * sizeof(Product));
+    printf("===================================\n");
+    printf("\tCONTROLE DE PAPELARIA\n");
+    printf("===================================\n");
 
-    // if (products == NULL) {
-    //     printf("Memory allocation failed!\n");
-    //     return 1;
-    // }
+    // Item ii: Solicita a margem de lucro percentual antes do cadastro
+    printf("Digite o percentual de lucro desejado (%%) para todos os produtos: ");
+    scanf("%f", &margem_lucro);
 
-    // struct tipoProduto p[];
-    int opt = 1;
+    // Item i: Leitura dos produtos enquanto o usuário desejar
+    do {
+        printf("\n--- Cadastrando Produto %d ---\n", total + 1);
 
-    printf("\n===================================\n");
-	printf("\tCONTROLE DE ESTOQUE");
-	printf("\n===================================\n");
+        printf("Código do produto: ");
+        scanf("%d", &produtos[total].codigo);
 
+        // Limpa o buffer antes do fgets
+        int c;
+        while ((c = getchar()) != '\n' && c != EOF);
 
-    while (opt != 0){
-        struct Produto produto1 = lerProduto("\nDigite alguma coisa\n");
-        printf("\n[1] - Continuar");
-        printf("\n[0] - Encerrar");
-        printf("\nOpção: ");
-        scanf("%d", &opt);
-    }
+        printf("Nome do produto: ");
+        fgets(produtos[total].nome, sizeof(produtos[total].nome), stdin);
+        produtos[total].nome[strcspn(produtos[total].nome, "\n")] = '\0';
 
+        printf("Unidade (ex: un, caixa, pct): ");
+        fgets(produtos[total].unidade, sizeof(produtos[total].unidade), stdin);
+        produtos[total].unidade[strcspn(produtos[total].unidade, "\n")] = '\0';
+
+        printf("Preço de custo: R$ ");
+        scanf("%f", &produtos[total].PCompra);
+
+        printf("Quantidade em estoque: ");
+        scanf("%f", &produtos[total].qtd_estoque);
+
+        // Cálculo do preço de venda com base na margem de lucro
+        produtos[total].PVenda = produtos[total].PCompra * (1.0f + (margem_lucro / 100.0f));
+
+        total++;
+
+        printf("\nDeseja cadastrar outro produto? (S/N): ");
+        scanf(" %c", &opcao_cadastro);
+
+    } while ((opcao_cadastro == 'S' || opcao_cadastro == 's') && total < MAX_PRODUTOS);
+
+    // Item iii: Menu de navegação e relatórios
+    char opcao_menu;
+    do {
+        printf("\n\n===================================");
+        printf("\n\tMENU DE OPÇÕES");
+        printf("\n===================================");
+        printf("\na. Listar todos os produtos");
+        printf("\nb. Buscar produto por código");
+        printf("\nc. Listar produtos com estoque zero");
+        printf("\nd. Mostrar produto de MAIOR valor de venda");
+        printf("\ne. Mostrar produto de MENOR valor de venda");
+        printf("\nf. Sair do programa");
+        printf("\nEscolha uma opção: ");
+        scanf(" %c", &opcao_menu);
+
+        switch (opcao_menu) {
+            case 'a':
+            case 'A':
+                printf("\n--- RELATÓRIO DE TODOS OS PRODUTOS ---");
+                for (int i = 0; i < total; i++) {
+                    exibirProduto(produtos[i]);
+                }
+                break;
+
+            case 'b':
+            case 'B': {
+                int cod_busca, achou = 0;
+                printf("\nDigite o código do produto desejado: ");
+                scanf("%d", &cod_busca);
+
+                for (int i = 0; i < total; i++) {
+                    if (produtos[i].codigo == cod_busca) {
+                        exibirProduto(produtos[i]);
+                        achou = 1;
+                        break;
+                    }
+                }
+                if (!achou) {
+                    printf("\nProduto com o código %d não foi encontrado.\n", cod_busca);
+                }
+                break;
+            }
+
+            case 'c':
+            case 'C': {
+                int encontrou_zero = 0;
+                printf("\n--- PRODUTOS COM ESTOQUE ZERO ---");
+                for (int i = 0; i < total; i++) {
+                    if (produtos[i].qtd_estoque <= 0) {
+                        exibirProduto(produtos[i]);
+                        encontrou_zero = 1;
+                    }
+                }
+                if (!encontrou_zero) {
+                    printf("\nNenhum produto está com estoque zerado.\n");
+                }
+                break;
+            }
+
+            case 'd':
+            case 'D': {
+                int id_maior = 0;
+                for (int i = 1; i < total; i++) {
+                    if (produtos[i].PVenda > produtos[id_maior].PVenda) {
+                        id_maior = i;
+                    }
+                }
+                printf("\n--- PRODUTO DE MAIOR VALOR DE VENDA ---");
+                exibirProduto(produtos[id_maior]);
+                break;
+            }
+
+            case 'e':
+            case 'E': {
+                int id_menor = 0;
+                for (int i = 1; i < total; i++) {
+                    if (produtos[i].PVenda < produtos[id_menor].PVenda) {
+                        id_menor = i;
+                    }
+                }
+                printf("\n--- PRODUTO DE MENOR VALOR DE VENDA ---");
+                exibirProduto(produtos[id_menor]);
+                break;
+            }
+
+            case 'f':
+            case 'F':
+                printf("\nEncerrando o programa...\n");
+                break;
+
+            default:
+                printf("\nOpção inválida! Tente novamente.\n");
+        }
+
+    } while (opcao_menu != 'f' && opcao_menu != 'F');
 
     return 0;
 }
