@@ -14,14 +14,18 @@ struct Funcionario {
 	int idade;
 };
 
-int main(){
+void clean_buffer() {
+	int c;
+	while ((c = getchar()) != '\n' && c != EOF);
+}
 
+int main(){
 	float total_salario = 0;
-	
 	struct Funcionario f[3];
 	
 	for(int i = 0; i < 3; i++){
-		fflush(stdin);
+		printf("\n=== CADASTRO FUNCIONARIO %d ===\n", i + 1);
+		
 		printf("\nNome: ");
 		fgets(f[i].nome, sizeof(f[i].nome), stdin);
 		f[i].nome[strcspn(f[i].nome, "\n")] = '\0';
@@ -30,8 +34,7 @@ int main(){
 		scanf("%f", &f[i].salario);
 		total_salario += f[i].salario;
 	
-		int c;
-		while ((c = getchar()) != '\n' && c != EOF); // Limpa o buffer
+		clean_buffer();
 	
 		printf("\nCargo: ");
 		fgets(f[i].cargo, sizeof(f[i].cargo), stdin);
@@ -39,6 +42,8 @@ int main(){
 	
 		printf("\nIdade: ");
 		scanf("%d", &f[i].idade);
+
+		clean_buffer();
 	}
 
 	// Exibição dos dados lidos
