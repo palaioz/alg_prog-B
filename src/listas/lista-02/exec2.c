@@ -10,7 +10,7 @@ número lido, em uma função chamada cálculo
 
 #define TAM 15
 
-float multVec(float v[], float k){
+float calculo(float v[], float k){
 	for (int i = 0; i < TAM; i++) {
 		v[i] = v[i] * k;
 	}
@@ -34,11 +34,13 @@ int main(){
 	printf("\nNum: ");
 	scanf("%f", &num);
 
-	multVec(vector, num);
+	calculo(vector, num);
 
 	printf("Resultado:");
 	for (int i = 0; i < TAM; i++){
 		printf("\t%.0f", vector[i]);
 	}
+
+    printf("\n");
 	return 0;
 }
