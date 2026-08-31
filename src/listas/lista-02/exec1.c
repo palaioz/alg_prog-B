@@ -13,7 +13,9 @@ void ageInDays(int anos, int meses, int dias){
 int main(){
 	int anos, meses, dias;
 
-	printf("\nAnos: ");
+    printf("\n--- Quantos dias voce viveu? ---\n");
+	
+    printf("\nAnos: ");
 	scanf("%d", &anos);
 	printf("Meses: ");
 	scanf("%d", &meses);
@@ -21,6 +23,7 @@ int main(){
 	scanf("%d", &dias);
 
 	ageInDays(anos, meses, dias);
-
+    
+    printf("\n");
 	return 0;
 }

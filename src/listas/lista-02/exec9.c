@@ -6,7 +6,32 @@ apenas as letras sem acentuação.
 */
 
 #include <stdio.h>
+#include <ctype.h>
+
+
+int ehVogal(char c) {
+    char minusculo = tolower(c);
+
+    if (minusculo == 'a' || minusculo == 'e' || minusculo == 'i' || minusculo == 'o' || minusculo == 'u'){
+        return 1;
+    }
+
+    return 0;
+}
+
+
 int main(){
-	printf("Hello World");
+    char letra;
+
+    printf("\n=== VERIFICADOR DE VOGAL ===\n");
+    printf("Digite um caractere: ");
+    scanf(" %c", &letra);
+
+    if (ehVogal(letra)){
+        printf("\nO caractere '%c' eh uma VOGAL.\n", letra);
+    } else {
+        printf("\nO caractere '%c' NAO eh uma vogal.\n", letra);
+    }
+
 	return 0;
 }
