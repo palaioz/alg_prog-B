@@ -9,7 +9,7 @@ matriz.
 #include <stdlib.h>
 #include <time.h>
 
-#define TAM 3
+#define TAM 10
 
 // --- DECLARAÇÃO DE FUNÇÕES ---
 
@@ -41,22 +41,30 @@ float max_float_matrix(float M[TAM][TAM]){
 	return max_value;
 }
 
-float minimax(float M[TAM][TAM], float max_value){
+void minimax(float M[TAM][TAM]){
 	int i, j;
 	int max_i = 0, max_j = 0;
 
 	for(i = 0; i < TAM; i++){
 		for(j = 0; j < TAM; j++){
-			if(M[i][j] == max_value){
+			if(M[i][j] > M[max_i][max_j]){
 				max_i = i;
 				max_j = j;
-				break;
 			}
 		}
 	}
 
-	for()
-	return minimax;
+	int min_j = 0;
+	for(j = 0; j < TAM; j++){
+		if(M[max_i][j] < M[max_i][min_j]){
+			min_j = j;
+		}
+	}
+
+	printf("\nMaior elemento da matriz: %0.f (Linha: %d, Coluna: %d)\n", M[max_i][max_j], max_i, max_j);
+	printf("\nElemento Minimax: %0.f (Linha: %d, Coluna: %d)\n", M[max_i][min_j], max_i, min_j);
+
+	return;
 }
 
 // --- MAIN ---
@@ -69,11 +77,14 @@ int main(){
 
 	for(i = 0; i < TAM; i++){
 		for(j = 0; j < TAM; j++){
-			Matriz[i][j] = rand()%10;
+			Matriz[i][j] = rand()%100;
 		}
 	}
 
-	float max_value = max_float_matrix(Matriz);
-	printf("Hello World");
+	printf("--- MATRIZ GERADA ---\n");
+	show_float_matrix(Matriz);
+
+	minimax(Matriz);
+
 	return 0;
 }
