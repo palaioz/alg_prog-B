@@ -12,13 +12,13 @@ int main() {
     printf("Digite um valor: ");
     scanf("%d", &a);
 
-    printf("a = %d \ta = %d\n", a, *p);
+    printf("a = %d \t*p (&a) = %d\n", a, *p);
     printf("Digite um outro valor: ");
     scanf("%d", p);
 
     *p = 10;
 
-    printf("a = %d", a);
+    printf("\na = %d", a);
 
     return 0;
 }
