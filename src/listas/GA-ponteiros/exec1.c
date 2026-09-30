@@ -23,7 +23,15 @@ int main()
     printf("\nQuantidade par: %d\n", evenCount);
     printf("%p\n", vec);
     printf("%p\n", &vec[0]);
-    printf("Primeiro elemento: %d\n", *vec + 1);
+    printf("Primeiro elemento: %d\n", *vec);
+
+    int *ptr = vec;
+
+    printf("\n--- VEC EM LOOP ---\n");
+    for (int i = 0; i < TAM; i++)
+    {
+        printf("%d\n", *(ptr + i) * 2);
+    }
 
     return 0;
 }
