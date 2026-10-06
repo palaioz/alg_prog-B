@@ -18,7 +18,6 @@ int main() {
     printf("Digite 10 numeros inteiros:\n");
     for (int i = 0; i < TAM; i++) {
         printf("V[%d]: ", i);
-        // (V + i) é equivalente a &V[i] usando notação de ponteiros
         scanf("%d", V + i);
     }
 
@@ -28,7 +27,6 @@ int main() {
 
     // Busca e exibição das posições
     for (int i = 0; i < TAM; i++) {
-        // *(V + i) acessa o valor contido na posição i, equivalente a V[i]
         if (*(V + i) == N) {
             printf("O numero %d foi encontrado no indice %d (posicao %d).\n", N, i, i + 1);
             encontrado = 1;

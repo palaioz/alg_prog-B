@@ -9,7 +9,6 @@ int main() {
     int vetor[20];
     int pares = 0;
     
-    // O nome do vetor atua como um ponteiro para o seu primeiro elemento
     int *ptr = vetor; 
 
     printf("Digite 20 numeros inteiros:\n");
@@ -19,12 +18,9 @@ int main() {
     }
 
     printf("\n--- Conteudo do Vetor ---\n");
-    // Percorrendo o vetor usando aritmética de ponteiros
     for(int i = 0; i < 20; i++) {
-        // *(ptr + i) acessa o valor no endereço de memória deslocado por 'i' posições
         printf("%d ", *(ptr + i));
         
-        // Verifica se o valor acessado pelo ponteiro é par
         if(*(ptr + i) % 2 == 0) {
             pares++;
         }

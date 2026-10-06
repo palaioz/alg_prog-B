@@ -25,7 +25,6 @@ int main() {
 
     // Multiplicando os elementos usando aritmética de ponteiros
     for(int i = 0; i < 10; i++) {
-        // *(vetorResultado + i) é exatamente o mesmo que vetorResultado[i]
         *(vetorResultado + i) = *(vetor1 + i) * *(vetor2 + i);
     }
 
