@@ -5,33 +5,32 @@
 
 #include <stdio.h>
 
-#define TAM 3
-
-int main()
-{
-    int vec[TAM] = {0};
-    int evenCount = 0;
-
-    printf("\n--- LEITURA ---\n");
-    for (int i = 0; i < TAM; i++)
-    {
-        printf("\nvec[%d] = ", i);
-        scanf("%d", &vec[i]);
-        if (vec[i] % 2 == 0){ evenCount++; };
-    }
+int main() {
+    int vetor[20];
+    int pares = 0;
     
-    printf("\nQuantidade par: %d\n", evenCount);
-    printf("%p\n", vec);
-    printf("%p\n", &vec[0]);
-    printf("Primeiro elemento: %d\n", *vec);
+    // O nome do vetor atua como um ponteiro para o seu primeiro elemento
+    int *ptr = vetor; 
 
-    int *ptr = vec;
-
-    printf("\n--- VEC EM LOOP ---\n");
-    for (int i = 0; i < TAM; i++)
-    {
-        printf("%d\n", *(ptr + i) * 2);
+    printf("Digite 20 numeros inteiros:\n");
+    for(int i = 0; i < 20; i++) {
+        printf("Elemento %d: ", i + 1);
+        scanf("%d", &vetor[i]);
     }
+
+    printf("\n--- Conteudo do Vetor ---\n");
+    // Percorrendo o vetor usando aritmética de ponteiros
+    for(int i = 0; i < 20; i++) {
+        // *(ptr + i) acessa o valor no endereço de memória deslocado por 'i' posições
+        printf("%d ", *(ptr + i));
+        
+        // Verifica se o valor acessado pelo ponteiro é par
+        if(*(ptr + i) % 2 == 0) {
+            pares++;
+        }
+    }
+
+    printf("\n\nQuantidade de valores pares no vetor: %d\n", pares);
 
     return 0;
 }
