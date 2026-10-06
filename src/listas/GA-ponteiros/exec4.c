@@ -7,8 +7,38 @@
 
 #include <stdio.h>
 
-int main()
-{
-    printf("Hello World!");
+#define TAM 10
+
+int main() {
+    int V[TAM];
+    int N;
+    int encontrado = 0;
+
+    // Leitura dos 10 elementos do vetor
+    printf("Digite 10 numeros inteiros:\n");
+    for (int i = 0; i < TAM; i++) {
+        printf("V[%d]: ", i);
+        // (V + i) é equivalente a &V[i] usando notação de ponteiros
+        scanf("%d", V + i);
+    }
+
+    // Leitura do número N
+    printf("\nDigite o numero N a ser buscado: ");
+    scanf("%d", &N);
+
+    // Busca e exibição das posições
+    for (int i = 0; i < TAM; i++) {
+        // *(V + i) acessa o valor contido na posição i, equivalente a V[i]
+        if (*(V + i) == N) {
+            printf("O numero %d foi encontrado no indice %d (posicao %d).\n", N, i, i + 1);
+            encontrado = 1;
+        }
+    }
+
+    // Mensagem caso não exista no vetor
+    if (!encontrado) {
+        printf("O numero fornecido nao existe no vetor!\n");
+    }
+
     return 0;
 }
