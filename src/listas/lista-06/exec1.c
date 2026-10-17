@@ -4,12 +4,15 @@
  * */
 
 #include <stdio.h>
+#include <string.h>
 
 void verticalString(char *p)
 {
     while (*p != '\0')
     {
-        printf("%c\n", *p);
+        if (*p != '\n') {
+            printf("%c\n", *p);
+        }
         p++;
     }
     return;
@@ -18,8 +21,9 @@ void verticalString(char *p)
 int main(){
     char p[150];
 
-    printf("Digite uma palavra: ");
-    scanf("%s", p);
+    printf("Digite uma palavra ou frase: ");
+    fgets(p, sizeof(p), stdin);
+    p[strcspn(p, "\n")] = '\0';
 
     printf("Palavra na vertical: \n");
     verticalString(p);

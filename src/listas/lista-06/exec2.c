@@ -7,7 +7,7 @@
 
 int stringLen(char *str)
 {
-    int c;
+    int c = 0;
     while (*str != '\0')
     {
         c++; 
@@ -22,7 +22,7 @@ int main(){
 	printf("Digite uma palavra: ");
     scanf("%s", p);
 
-    char qtd_caracteres = stringLen(p);
+    int qtd_caracteres = stringLen(p);
 
     printf("\nQuantidade de caracteres: %d\n", qtd_caracteres);
 	

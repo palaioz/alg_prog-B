@@ -5,7 +5,30 @@
  * */
 
 #include <stdio.h>
+
+void cutString(char *str, char l) {
+    while (*str != '\0') {
+        if (*str == l) {
+            *str = '\0';
+            break;
+        }
+        str++;
+    }
+}
+
 int main(){
-	printf("Hello World");
+	char palavra[100];
+    char letra;
+
+    printf("Digite uma palavra: ");
+    scanf("%s", palavra);
+
+    printf("Digite a letra para o corte: ");
+    scanf(" %c", &letra);
+
+    cutString(palavra, letra);
+
+    printf("\nPalavra cortada: %s\n", palavra);
+
 	return 0;
 }
