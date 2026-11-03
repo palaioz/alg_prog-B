@@ -6,7 +6,30 @@
 
 #include <stdio.h>
 
-int main(){
-	printf("Hello World");
-	return 0;
+int contarCaractere(char *str, char c) {
+    int contador = 0;
+    while (*str != '\0') {
+        if (*str == c) {
+            contador++;
+        }
+        str++;
+    }
+    return contador;
+}
+
+int main() {
+    char str[100];
+    char c;
+
+    printf("Digite uma string: ");
+    scanf("%99s", str);
+
+    printf("Digite um caractere: ");
+    scanf(" %c", &c);
+
+    int qtd = contarCaractere(str, c);
+
+    printf("O caractere '%c' ocorre %d vezes.\n", c, qtd);
+
+    return 0;
 }

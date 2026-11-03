@@ -5,8 +5,33 @@
  * */
 
 #include <stdio.h>
+#include <string.h>
 
-int main(){
-	printf("Hello World");
-	return 0;
+int ehPalindromo(char *str) {
+    int inicio = 0;
+    int fim = strlen(str) - 1;
+
+    while (inicio < fim) {
+        if (str[inicio] != str[fim]) {
+            return 0;
+        }
+        inicio++;
+        fim--;
+    }
+    return 1;
+}
+
+int main() {
+    char palavra[100];
+
+    printf("Digite uma palavra: ");
+    scanf("%99s", palavra);
+
+    if (ehPalindromo(palavra)) {
+        printf("1\n");
+    } else {
+        printf("0\n");
+    }
+
+    return 0;
 }
