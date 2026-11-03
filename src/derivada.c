@@ -98,7 +98,7 @@ int main() {
         break;
     }
 
-    double *v = (double *) malloc ((n+1) * sizeof(double));
+    double *v = (double *) malloc((n+1) * sizeof(double));
     if (v == NULL) {
         printf("Erro fatal: Falha na alocacao de memoria.\n");
         return 1;
