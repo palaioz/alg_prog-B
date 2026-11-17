@@ -3,7 +3,7 @@
 int main() {
     FILE *fptr;
 
-    int qtd_exec = 12; 
+    int qtd_exec = 7; 
 
     for (int i = 1; i <= qtd_exec; i++) {
         char filename[150];
@@ -11,7 +11,7 @@ int main() {
         printf("\nSalvando outro arquivo...\n");
 
         // snprintf(filename, sizeof(filename), "C:/Users/tonho/CC_417/alg_prog/exercicios/C/src/listas/lista-03/exec%0d.c", i);
-        snprintf(filename, sizeof(filename), "./listas/lista-06/exec%d.c", i);
+        snprintf(filename, sizeof(filename), "./listas/lista-07/exec%d.c", i);
 
         printf("%s\n", filename);
 
