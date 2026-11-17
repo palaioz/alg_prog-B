@@ -5,21 +5,28 @@
  * */
 
 #include <stdio.h>
+#include <stdlib.h>
 
 int *soma_matriz(int *A, int *B, int N) {
     int *C;
     int i, j;
 
+    C = (int *) malloc(N * sizeof(int));
+    if (C == NULL) {
+        printf("[ERRO] Erro de alocacao de memoria!\n");
+        exit(-1);
+    }
+
     for (i = 0; i < N; i++) {
-        
+        C[i] = A[i] + B[i];
     }
 
     return C;
 }
 
 int main(){
-	int *A, *B;
-    int col, lin, i, j;
+	int *A, *B, *C;
+    int col, lin, tam, i, j;
 
     printf("Quantidade de colunas nas matrizes: ");
     scanf("%d", &col);
@@ -27,12 +34,45 @@ int main(){
     printf("\nQuantidade de linhas nas matrizes: ");
     scanf("%d", &lin);
 
+    tam = lin * col;
 
     A = (int *) malloc(tam * sizeof(int));
     B = (int *) malloc(tam * sizeof(int));
 
+    if (A == NULL || B == NULL) {
+        printf("[ERRO] Erro de alocacao de memoria!\n");
+        return 1;
+    }
+
+    printf("\n--- Digite os elementos da Matriz A ---\n");
+    for (i = 0; i < lin; i++) {
+        for (j = 0; j < col; j++) {
+            printf("A[%d][%d]: ", i, j);
+            scanf("%d", &A[i * col + j]);
+        }
+    }
+
+    printf("\n--- Digite os elementos da Matriz B ---\n");
+    for (i = 0; i < lin; i++) {
+        for (j = 0; j < col; j++) {
+            printf("B[%d][%d]: ", i, j);
+            scanf("%d", &B[i * col + j]);
+        }
+    }
+
+    C = soma_matriz(A, B, tam);
+
+    printf("\n--- Matriz C (A + B) ---\n");
+    for (i = 0; i < lin; i++) {
+        for (j = 0; j < col; j++) {
+            printf("%d\t", C[i * col + j]);
+        }
+        printf("\n");
+    }
+
     free(A);
     free(B);
+    free(C);
 
     return 0;
 }
