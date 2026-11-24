@@ -1,3 +1,4 @@
+
 /*
  *  1. Fazer a soma de dois vetores alocados dinamicamente. O tamanho 
  *  dos vetores é informado pelo usuário.
@@ -11,12 +12,16 @@ int main(){
     int *vetor;
 
     printf("\nDigite o tamanho do vetor: ");
-    scanf(" %d", &tam);
 
-    vetor = (int *) malloc(tam * sizeof(int));
+    if (scanf(" %d", &tam) != 1 || tam <= 0) {
+        printf("\n[ERRO] Tamanho invalido.\n");
+        return -1;
+    }
+
+    vetor = malloc((size_t)tam * sizeof(int));
 
     if (!vetor) {
-        printf("\n[ERRO] ERro na alocacao do vetor.\n");
+        printf("\n[ERRO] Erro na alocacao do vetor.\n");
         exit(-1);
     }
 
