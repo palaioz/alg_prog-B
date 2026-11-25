@@ -11,7 +11,7 @@ int *soma_matriz(int *A, int *B, int N) {
     int *C;
     int i, j;
 
-    C = (int *) malloc(N * sizeof(int));
+    C = (int *) malloc((size_t)N * sizeof(int));
     if (C == NULL) {
         printf("[ERRO] Erro de alocacao de memoria!\n");
         exit(-1);
@@ -24,23 +24,31 @@ int *soma_matriz(int *A, int *B, int N) {
     return C;
 }
 
-int main(){
-	int *A, *B, *C;
+int main(void){
+	int *A = NULL, *B = NULL, *C = NULL;
     int col, lin, tam, i, j;
 
     printf("Quantidade de colunas nas matrizes: ");
-    scanf("%d", &col);
+    if (scanf("%d", &col) != 1 || col <=0){
+        printf("\n[ERRO] Quantidade de colunas invalida!\n");
+        return 1;
+    }
     
     printf("\nQuantidade de linhas nas matrizes: ");
-    scanf("%d", &lin);
+    if (scanf("%d", &lin) != 1 || col <=0){
+        printf("\n[ERRO] Quantidade de linhas invalida!\n");
+        return 1;
+    }
 
     tam = lin * col;
 
-    A = (int *) malloc(tam * sizeof(int));
-    B = (int *) malloc(tam * sizeof(int));
+    A = (int *) malloc((size_t)tam * sizeof(int));
+    B = (int *) malloc((size_t)tam * sizeof(int));
 
     if (A == NULL || B == NULL) {
         printf("[ERRO] Erro de alocacao de memoria!\n");
+        free(A);
+        free(B);
         return 1;
     }
 

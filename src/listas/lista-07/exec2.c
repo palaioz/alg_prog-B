@@ -7,17 +7,19 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 
 int main() {
     int tam, i;
     char *s;
 
     printf("Quantas letras: ");
-    scanf("%d", &tam);
+    if (scanf(" %d", &tam) != 1 || tam <= 0) {
+        printf("\n[ERRO] Tamanho invalido\n");
+        return -1;
+    } 
 
     // Aloca dinamicamente o espaço para a string + o caractere nulo '\0'
-    s = (char *) malloc(sizeof(char) * (tam + 1));
+    s = (char *) malloc(sizeof(char) * (size_t)(tam + 1));
 
     if (!s) {
         printf("\n[ERRO] Erro na alocacao de memoria\n");
@@ -26,9 +28,6 @@ int main() {
 
     printf("Digite a string:\n");
     
-    // Limpa o buffer de entrada para remover o '\n' pendente do scanf anterior
-    while (getchar() != '\n');
-
     for (i = 0; i < tam; i++) {
         printf("%da. letra: ", i + 1);
         // O espaço antes de %c (" %c") é fundamental para ignorar quebras de linha e espaços
@@ -45,3 +44,4 @@ int main() {
 
     return 0;
 }
+
